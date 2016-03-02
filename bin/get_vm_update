@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'dl_racktables'
+
+sys = DLRacktables::System.new
+
+unless target = ARGV.first
+  DlRacktables::Output.error('invalid parameter')
+  exit 1
+end
+
+if ret = sys.who_operate_vm_lastly(target)
+  DlRacktables::Output.success(ret)
+else
+  DlRacktables::Output.error("failed to find target VM (#{target})")
+end
